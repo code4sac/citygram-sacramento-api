@@ -1,0 +1,9 @@
+version: '3'
+services:
+  citygram-sacramento-api:
+    build: .
+    volumes:
+      - .:/citygram-sacramento-api
+    ports:
+      - "1850:1850"
+    command: bundle exec ruby app.rb
