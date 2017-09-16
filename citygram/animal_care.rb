@@ -21,7 +21,7 @@ module Citygram
         }
       end
 
-      {'features' => features }.compact.to_json
+      {'features' => features.compact }.to_json
     end
   end
 end
