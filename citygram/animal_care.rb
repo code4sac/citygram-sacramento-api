@@ -1,15 +1,14 @@
+require_relative './url'
+
 module Citygram
   class AnimalCare
-    def self.retrieve_records(offset = 0)
-      response = HTTParty.get("https://services5.arcgis.com/54falWtcpty3V47Z/ArcGIS/rest/services/311Calls_OSC_View/FeatureServer/0/query?where=CategoryLevel1+%3D+%27Animal+care%27&1%3D1&objectIds=&resultOffset=#{offset}&outFields=*&returnGeometry=true&f=pjson")
-      records = JSON.parse(response.body)['features']
-
-      features = records.map do |record|
+    def self.build_features(records)
+      records.map do |record|
         lat = record['attributes']['Latitude'].to_f
         lng = record['attributes']['Longitude'].to_f
         next if lat == 0.0 || lng == 0.0
 
-        title = "Animal Care Holder Title"
+        title = record['attributes']['CategoryHierarchy']
         {
           'id'          => record['attributes']['GlobalID'],
           'type'        => 'Feature',
@@ -20,8 +19,17 @@ module Citygram
           }
         }
       end
+    end
 
-      {'features' => features.compact }.to_json
+    def self.retrieve_records(offset = 0)
+      url = Citygram::Url.build('Animal care', 0)
+      response = JSON.parse(HTTParty.get(url).body)
+      records = response['features']
+
+      features = build_features(records)
+
+      next_page_url =  Citygram::Url.build('Animal care', offset + 1000) if response['exceededTransferLimit']
+      [{'features' => features.compact }.to_json, next_page_url]
     end
   end
 end
