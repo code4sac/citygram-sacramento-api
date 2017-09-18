@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'httparty'
 require 'json'
+require 'pry'
 require_relative './citygram/animal_care'
 
 set :bind, '0.0.0.0'
@@ -10,5 +11,6 @@ get '/' do
 end
 
 get '/animal_care' do
-  Citygram::AnimalCare.retrieve_records
+  response, headers['Next-Page'] = Citygram::AnimalCare.retrieve_records(params[:offset].to_i)
+  response
 end
