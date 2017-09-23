@@ -26,3 +26,9 @@ get '/sewer' do
   response, headers['Next-Page'] = Citygram::Sewer.retrieve_records(params[:offset].to_i)
   response
 end
+
+get '/code_enforcement' do
+    response, headers['Next-Page'] = Citygram::CodeEnforcement.retrieve_records(params[:offset].to_i)
+  response
+end
+    
