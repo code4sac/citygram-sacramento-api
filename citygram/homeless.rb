@@ -1,7 +1,7 @@
 require_relative './url'
 
 module Citygram
-  class Other
+  class Homeless
     def self.build_features(records)
       records.map do |record|
         lat = record['attributes']['Latitude'].to_f

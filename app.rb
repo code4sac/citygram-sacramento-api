@@ -3,7 +3,8 @@ require 'httparty'
 require 'json'
 require 'pry'
 require_relative './citygram/animal_care'
-require_relative './citygram/other'
+require_relative './citygram/homeless'
+require_relative './citygram/sewer'
 
 set :bind, '0.0.0.0'
 
@@ -16,7 +17,12 @@ get '/animal_care' do
   response
 end
 
-get '/other' do
-  response, headers['Next-Page'] = Citygram::Other.retrieve_records(params[:offset].to_i)
+get '/homeless' do
+  response, headers['Next-Page'] = Citygram::Homeless.retrieve_records(params[:offset].to_i)
+  response
+end
+
+get '/sewer' do
+  response, headers['Next-Page'] = Citygram::Sewer.retrieve_records(params[:offset].to_i)
   response
 end
