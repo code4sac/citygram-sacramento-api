@@ -3,9 +3,13 @@ require_relative './url'
 module Citygram
     class CodeEnforcement
 
-#    ALLOWED_HIERARCHIES = [
-#    
-#    ].freeze
+    ALLOWED_HIERARCHIES = [
+    'Code Enforcement : Environmental : Complaint',
+    'Code Enforcement : Environmental : Pest',
+    'Code Enforcement : Environmental : Stagnant Water',
+    'Code Enforcement : Vehicle On-Street : Potential   Hazard',
+    'Code Enforcement : Work Without Permit'
+    ].freeze
 
     def self.build_features(records)
       records.map do |record|
@@ -13,8 +17,8 @@ module Citygram
         lng = record['attributes']['Longitude'].to_f
         next if lat == 0.0 || lng == 0.0
 
-#        category_hierarchy = record['attributes']['CategoryHierarchy']
-#        next unless ALLOWED_HIERARCHIES.include?(category_hierarchy)
+        category_hierarchy = record['attributes']['CategoryHierarchy']
+        next unless ALLOWED_HIERARCHIES.include?(category_hierarchy)
 
         title = record['attributes']['CategoryHierarchy']
         {
