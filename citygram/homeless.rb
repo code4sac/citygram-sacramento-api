@@ -2,14 +2,20 @@ require_relative './url'
 
 module Citygram
   class Homeless
+      ALLOWED_HIERARCHIES = [
+      'Other : Homeless Camp'
+      ].freeze
+      
     def self.build_features(records)
       records.map do |record|
         lat = record['attributes']['Latitude'].to_f
         lng = record['attributes']['Longitude'].to_f
         next if lat == 0.0 || lng == 0.0
 
-        category_name = record['attributes']['CategoryName']
-        next if category_name != 'Homeless Camp'
+        
+
+        category_hierarchy = record['attributes']['CategoryHierarchy']
+        next unless ALLOWED_HIERARCHIES.include?(category_hierarchy)
 
         title = record['attributes']['CategoryHierarchy']
         {
