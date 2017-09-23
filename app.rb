@@ -5,6 +5,7 @@ require 'pry'
 require_relative './citygram/animal_care'
 require_relative './citygram/homeless'
 require_relative './citygram/sewer'
+require_relative './citygram/code_enforcement'
 
 set :bind, '0.0.0.0'
 
@@ -28,7 +29,7 @@ get '/sewer' do
 end
 
 get '/code_enforcement' do
-    response, headers['Next-Page'] = Citygram::CodeEnforcement.retrieve_records(params[:offset].to_i)
+    response, headers['Next-Page'] =  Citygram::CodeEnforcement.retrieve_records(params[:offset].to_i)
   response
 end
     
