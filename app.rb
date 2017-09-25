@@ -6,7 +6,7 @@ require_relative './citygram/animal_care'
 require_relative './citygram/homeless'
 require_relative './citygram/sewer'
 require_relative './citygram/code_enforcement'
-require_relative './citygram/urban_forestry
+require_relative './citygram/urban_forestry'
 
 set :bind, '0.0.0.0'
 
