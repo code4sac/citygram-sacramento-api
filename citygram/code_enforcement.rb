@@ -34,7 +34,7 @@ module Citygram
     end
 
     def self.retrieve_records(offset = 0)
-      url = Citygram::Url.build('Code Enforcement', 0)
+      url = Citygram::Url.build('Code Enforcement', offset)
       response = JSON.parse(HTTParty.get(url).body)
       records = response['features']
 

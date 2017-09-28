@@ -22,7 +22,7 @@ module Citygram
     end
 
     def self.retrieve_records(offset = 0)
-      url = Citygram::Url.build('Animal care', 0)
+      url = Citygram::Url.build('Animal care', offset)
       response = JSON.parse(HTTParty.get(url).body)
       records = response['features']
 
