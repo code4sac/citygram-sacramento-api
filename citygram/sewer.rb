@@ -32,7 +32,7 @@ module Citygram
     end
 
     def self.retrieve_records(offset = 0)
-      url = Citygram::Url.build('Sewer', 0)
+      url = Citygram::Url.build('Sewer', offset)
       response = JSON.parse(HTTParty.get(url).body)
       records = response['features']
 
