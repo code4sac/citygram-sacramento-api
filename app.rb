@@ -30,12 +30,11 @@ get '/sewer' do
 end
 
 get '/code_enforcement' do
-    response, headers['Next-Page'] =  Citygram::CodeEnforcement.retrieve_records(params[:offset].to_i)
+  response, headers['Next-Page'] =  Citygram::CodeEnforcement.retrieve_records(params[:offset].to_i)
   response
 end
 
 get '/urban_forestry' do
-response, headers['Next-Page'] =  Citygram::UrbanForestry.retrieve_records(params[:offset].to_i)
+	response, headers['Next-Page'] =  Citygram::UrbanForestry.retrieve_records(params[:offset].to_i)
   response
 end
-    

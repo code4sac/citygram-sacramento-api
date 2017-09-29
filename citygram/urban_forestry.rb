@@ -2,29 +2,28 @@ require_relative './url'
 
 module Citygram
   class UrbanForestry
-      ALLOWED_HIERARCHIES = [
-        'Urban Forestry : Inspection'
-      ].freeze
+		
+	ALLOWED_HIERARCHIES = [
+  	'Urban Forestry : Inspection'
+  ].freeze
       
-    def self.build_features(records)
-      records.map do |record|
-        lat = record['attributes']['Latitude'].to_f
-        lng = record['attributes']['Longitude'].to_f
-        next if lat == 0.0 || lng == 0.0
+	def self.build_features(records)
+		records.map do |record|
+      lat = record['attributes']['Latitude'].to_f
+      lng = record['attributes']['Longitude'].to_f
+			next if lat == 0.0 || lng == 0.0
 
-        
+      category_hierarchy = record['attributes']['CategoryHierarchy']
+      next unless ALLOWED_HIERARCHIES.include?(category_hierarchy)
 
-        category_hierarchy = record['attributes']['CategoryHierarchy']
-        next unless ALLOWED_HIERARCHIES.include?(category_hierarchy)
-
-        title = record['attributes']['CategoryHierarchy']
-        {
-          'id'          => record['attributes']['GlobalID'],
-          'type'        => 'Feature',
-          'properties'  => record.merge('title' => title),
-          'geometry'    => {
-            'type'        => 'Point',
-            'coordinates' =>  [lng, lat]
+      title = record['attributes']['CategoryHierarchy']
+      {
+        'id'          => record['attributes']['GlobalID'],
+        'type'        => 'Feature',
+        'properties'  => record.merge('title' => title),
+        'geometry'    => {
+        	'type'        => 'Point',
+        	'coordinates' =>  [lng, lat]
           }
         }
       end
