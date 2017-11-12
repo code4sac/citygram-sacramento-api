@@ -1,4 +1,5 @@
 require_relative './url'
+require_relative './feature'
 
 module Citygram
   class Sewer

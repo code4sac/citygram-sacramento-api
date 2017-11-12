@@ -3,6 +3,15 @@ require_relative './feature'
 
 module Citygram
   class AnimalCare
+
+    ALLOWED_HIERARCHIES = [
+      'Animal care : Stray',
+      'Animal care : Stray : Injured',
+      'Animal care : Stray : Loose',
+      'Animal care : Stray : Sick',
+      'Animal care : Stray : Welfare'
+    ].freeze
+
     def self.retrieve_records(offset = 0)
       url = Citygram::Url.build('Animal care', offset)
       response = JSON.parse(HTTParty.get(url).body)
