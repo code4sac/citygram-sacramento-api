@@ -17,7 +17,7 @@ module Citygram
       response = JSON.parse(HTTParty.get(url).body)
       records = response['features']
 
-      features = Citygram::Feature.build(records)
+      features = Citygram::Feature.build(records, ALLOWED_HIERARCHIES)
 
       next_page_url =  Citygram::Url.build('Animal care', offset + 1000) if response['exceededTransferLimit']
 
