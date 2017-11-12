@@ -6,14 +6,13 @@ describe Citygram::Feature do
   describe '.build' do
     let(:record) do
       { 
-        'attributes' =>
-          {
-            'GlobalID'          =>  SecureRandom.uuid,
-            'Latitude'          =>  '36.127',
-            'Longitude'         =>  '36.127',
-            'CategoryHierarchy' =>  'HAM',
-            'DateCreated'       =>  Citygram::Feature::THREE_DAYS_AGO
-          }
+        'attributes' => {
+          'GlobalID'          =>  SecureRandom.uuid,
+          'Latitude'          =>  '36.127',
+          'Longitude'         =>  '36.127',
+          'CategoryHierarchy' =>  'HAM',
+          'DateCreated'       =>  Citygram::Feature::THREE_DAYS_AGO
+        }
       }
     end
 
@@ -58,7 +57,7 @@ describe Citygram::Feature do
 
     context 'record is older than 3 days in record' do
       it 'will filter out the record' do
-        record['attributes']['DateCreated'] = '487728000000'
+        record['attributes']['DateCreated'] = DateTime.new(1985,6,16).strftime('%Q')
 
         expect(described_class.build([record])).to eq([])
       end
