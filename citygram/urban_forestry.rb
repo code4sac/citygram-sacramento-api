@@ -3,10 +3,10 @@ require_relative './feature'
 
 module Citygram
   class UrbanForestry
-		
-	ALLOWED_HIERARCHIES = [
-  	'Urban Forestry : Inspection'
-  ].freeze
+
+    ALLOWED_HIERARCHIES = [
+      'Urban Forestry : Inspection'
+    ].freeze
 
     def self.retrieve_records(offset = 0)
       url = Citygram::Url.build('Urban Forestry', 0)
