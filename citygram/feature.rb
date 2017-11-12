@@ -26,7 +26,7 @@ module Citygram
             'coordinates' =>  [lng, lat]
           }
         }
-      end
+      end.compact
     end
   end
 end
